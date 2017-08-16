@@ -1,0 +1,33 @@
+{
+  "name": "webpack-starter",
+  "version": "1.0.0",
+  "description": "simple webpack config",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeeSwagger/webpack-starter.git"
+  },
+  "keywords": [
+    "webpack",
+    "es6",
+    "babel",
+    "eslint"
+  ],
+  "author": "LeeSwagger",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LeeSwagger/webpack-starter/issues"
+  },
+  "homepage": "https://github.com/LeeSwagger/webpack-starter#readme",
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-env": "^1.6.0",
+    "lodash": "^4.17.4",
+    "webpack": "^3.5.4"
+  }
+}
