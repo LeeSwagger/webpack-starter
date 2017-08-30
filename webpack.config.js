@@ -11,12 +11,7 @@ const extractSass = new ExtractTextPlugin({
     disable: isDevelopment
 });
 
-if (isDevelopment) {
-    fs.readdirSync(assetsPath)
-        .map(fileName => path.extname(fileName) === '.css' ? fs.unlinkSync(`${assetsPath}/${fileName}`) : '');
-}
-
-module.exports = {
+const config = {
     entry: {
         main: './src/js/index.js'
     },
@@ -40,7 +35,15 @@ module.exports = {
             use: extractSass.extract({
                 fallback: 'style-loader',
                 //resolve-url-loader may be chained before sass-loader if necessary
-                use: ['css-loader', 'sass-loader', 'resolve-url-loader']
+                use: [{
+                        loader: 'css-loader',
+                        options: {
+                            minimize: !isDevelopment
+                        }
+                    },
+                    'sass-loader',
+                    'resolve-url-loader'
+                ]
             })
         }]
     },
@@ -56,3 +59,26 @@ module.exports = {
         port: 9000
     }
 };
+
+if (isDevelopment) {
+    fs.readdirSync(assetsPath)
+        .map((fileName) => {
+            if (['.css', '.js'].includes(path.extname(fileName))) {
+                return fs.unlinkSync(`${assetsPath}/${fileName}`);
+            }
+
+            return '';
+        });
+} else {
+    config.plugins.push(
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false,
+                drop_console: true,
+                unsafe: true
+            }
+        })
+    );
+}
+
+module.exports = config;
