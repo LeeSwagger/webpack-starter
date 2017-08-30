@@ -1,3 +1,5 @@
+import './../sass/styles.scss';
+
 const component = () => {
     const helloWebpack = _.join(_.values({
         a: 'Hello',
