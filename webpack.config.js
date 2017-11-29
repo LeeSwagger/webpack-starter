@@ -45,6 +45,22 @@ const config = {
                     'resolve-url-loader'
                 ]
             })
+        }, {
+            test: /\.(gif|png|jpe?g|svg)$/i,
+            use: [
+                'file-loader', {
+                    loader: 'image-webpack-loader',
+                    options: {
+                        mozjpeg: {
+                            progressive: true,
+                            quality: 70
+                        }
+                    }
+                },
+            ],
+        }, {
+            test: /\.(eot|svg|ttf|woff|woff2)$/,
+            use: 'file-loader',
         }]
     },
     plugins: [
