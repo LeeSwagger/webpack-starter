@@ -47,8 +47,12 @@ const config = {
             })
         }, {
             test: /\.(gif|png|jpe?g|svg)$/i,
-            use: [
-                'file-loader', {
+            use: [{
+                    loader: 'file-loader',
+                    options: {
+                        name: 'images/[name][hash].[ext]'
+                    }
+                }, {
                     loader: 'image-webpack-loader',
                     options: {
                         mozjpeg: {
@@ -60,7 +64,12 @@ const config = {
             ],
         }, {
             test: /\.(eot|svg|ttf|woff|woff2)$/,
-            use: 'file-loader',
+            use: {
+                loader: 'file-loader',
+                options: {
+                    name: 'fonts/[name][hash].[ext]'
+                }
+            },
         }]
     },
     plugins: [
