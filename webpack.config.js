@@ -74,7 +74,10 @@ const config = {
     }]
   },
   plugins: [
-    extractSass
+    extractSass,
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+    })
   ],
   devServer: {
     contentBase: distPath,
@@ -103,9 +106,6 @@ if (isProduction) {
         drop_console: true,
         unsafe: true
       }
-    }),
-    new HtmlWebpackPlugin({
-      template: './src/index.html'
     })
   );
 }
