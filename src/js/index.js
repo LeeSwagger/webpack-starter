@@ -1,6 +1,7 @@
 import './../sass/styles.scss';
+import _ from 'lodash';
 
-const component = () => {
+const getHeader = () => {
     const helloWebpack = _.join(_.values({
         a: 'Hello',
         b: 'webpack'
@@ -13,4 +14,4 @@ const component = () => {
     return element;
 };
 
-document.body.appendChild(component());
+document.body.appendChild(getHeader());
