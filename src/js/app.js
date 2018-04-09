@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import './../sass/styles.scss';
+import styles from './../sass/styles.scss';
 
 export default class App extends Component {
   render() {
     return (
-      <h1>
+      <h1 className={styles["header-custom"]}>
         Hello from react
       </h1>
     );

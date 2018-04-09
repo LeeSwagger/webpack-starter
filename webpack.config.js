@@ -39,6 +39,10 @@ const config = {
         use: [{
           loader: 'css-loader',
           options: {
+            modules: true,
+            sourceMap: true,
+            importLoaders: 2,
+            localIdentName: '[name]__[local]__[hash:base64:5]', // className template
             minimize: isProduction
           }
         },
