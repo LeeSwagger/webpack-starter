@@ -1,7 +1,7 @@
 {
   "name": "webpack-starter",
   "version": "4.1.1",
-  "description": "simple webpack config",
+  "description": "Simple webpack config",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -18,10 +18,10 @@
     "webpack",
     "es6",
     "babel",
-    "eslint"
+    "sass"
   ],
   "author": "LeeSwagger",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/LeeSwagger/webpack-starter/issues"
   },
@@ -42,7 +42,7 @@
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.3",
     "uglifyjs-webpack-plugin": "^1.2.3",
-    "webpack": "^4.1.1",
+    "webpack": "^4.5.0",
     "webpack-cli": "^2.0.12",
     "webpack-dev-server": "^3.1.1",
     "yargs": "^11.0.0"
