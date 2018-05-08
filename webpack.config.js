@@ -1,17 +1,12 @@
 const path = require('path');
 const argv = require('yargs').argv;
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const isDevelopment = argv.mode === 'development';
 const isProduction = !isDevelopment;
 const distPath = path.join(__dirname, '/public');
-
-const extractSass = new ExtractTextPlugin({
-  filename: '[name].css',
-  disable: isDevelopment
-});
 
 const config = {
   entry: {
@@ -37,18 +32,17 @@ const config = {
     }, {
       test: /\.scss$/,
       exclude: /node_modules/,
-      use: extractSass.extract({
-        fallback: 'style-loader',
-        use: [{
+      use: [
+        isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
+        {
           loader: 'css-loader',
           options: {
             minimize: isProduction
           }
         },
-          'sass-loader',
-          'resolve-url-loader'
-        ]
-      })
+        'sass-loader',
+        'resolve-url-loader'
+      ]
     }, {
       test: /\.(gif|png|jpe?g|svg)$/i,
       use: [{
@@ -77,7 +71,10 @@ const config = {
     }]
   },
   plugins: [
-    extractSass,
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css'
+    }),
     new HtmlWebpackPlugin({
       template: './src/index.html'
     })
