@@ -24,24 +24,26 @@ const config = {
       test: /\.js$/,
       exclude: /node_modules/,
       use: [{
-        loader: 'babel-loader',
-        options: {
-          presets: ['env']
-        }
+        loader: 'babel-loader'
       }]
     }, {
       test: /\.scss$/,
       exclude: /node_modules/,
       use: [
         isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
+        'css-loader',
         {
-          loader: 'css-loader',
+          loader: 'postcss-loader',
           options: {
-            minimize: isProduction
+            plugins: [
+              isProduction ? require('cssnano') : () => {},
+              require('autoprefixer')({
+                browsers: ['last 2 versions']
+              })
+            ]
           }
         },
-        'sass-loader',
-        'resolve-url-loader'
+        'sass-loader'
       ]
     }, {
       test: /\.(gif|png|jpe?g|svg)$/i,
@@ -86,9 +88,7 @@ const config = {
         uglifyOptions: {
           compress: {
             inline: false,
-            warnings: false,
-            drop_console: true,
-            unsafe: true
+            drop_console: true
           },
         },
       }),
