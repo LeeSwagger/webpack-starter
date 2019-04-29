@@ -1,4 +1,5 @@
 const path = require('path');
+const glob = require('glob');
 const argv = require('yargs').argv;
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
@@ -77,9 +78,13 @@ const config = {
       filename: '[name].css',
       chunkFilename: '[id].css'
     }),
-    new HtmlWebpackPlugin({
-      template: './src/index.html'
-    })
+    ...glob.sync('./src/*.html')
+      .map(htmlFile => {
+        return new HtmlWebpackPlugin({
+          filename: path.basename(htmlFile),
+          template: htmlFile
+        });
+      })
   ],
   optimization: isProduction ? {
     minimizer: [
