@@ -47,7 +47,7 @@ const config = {
         'sass-loader'
       ]
     }, {
-      test: /\.(gif|png|jpe?g|svg)$/i,
+      test: /images[\\\/].+\.(gif|png|jpe?g|svg)$/i,
       use: [{
         loader: 'file-loader',
         options: {
@@ -64,7 +64,7 @@ const config = {
       },
       ],
     }, {
-      test: /\.(eot|svg|ttf|woff|woff2)$/,
+      test: /fonts[\\\/].+\.(otf|eot|svg|ttf|woff|woff2)$/i,
       use: {
         loader: 'file-loader',
         options: {
